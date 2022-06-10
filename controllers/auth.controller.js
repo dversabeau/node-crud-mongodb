@@ -3,6 +3,7 @@ const UserModel = require('../models/users.model')
 
 module.exports.signUp = async (req, res) => {
   const {pseudo, email, password} = req.body
+  console.log(req.body)
 
   try {
     const user = await UserModel.create({pseudo, email, password})
@@ -11,5 +12,5 @@ module.exports.signUp = async (req, res) => {
   catch(err){
     res.status(200).send({err})
   }
-  
+
 }
