@@ -9,10 +9,10 @@ module.exports.signUpErrors = (err) => {
     errors.pseudo = "Pseudo requis ou invalide";
   }
   if (err.message.includes("email")) {
-    errors.pseudo = "email invalide";
+    errors.email = "email invalide";
   }
   if (err.message.includes("password")) {
-    errors.pseudo = "Mot de passe incorrect (minimum 6 caractères)";
+    errors.password = "Mot de passe incorrect (minimum 6 caractères)";
   }
   if (err.code === 11000) {
     Object.keys(err.keyValue).map((key) => {
@@ -20,10 +20,22 @@ module.exports.signUpErrors = (err) => {
         errors.pseudo = "Pseudo déjà utilisé";
       }
       if (key.includes("email")) {
-        errors.pseudo = "Email déjà utilisé";
+        errors.email = "Email déjà utilisé";
       }
     });
   }
+
+  return errors;
+};
+
+module.exports.signInErrors = (err) => {
+  let errors = {
+    email: "",
+    password: "",
+  };
+
+  if (err.message.includes("email")) errors.email = "Email inconnu";
+  if (err.message.includes("password")) errors.email = "Mot de passe incorrect";
 
   return errors;
 };
